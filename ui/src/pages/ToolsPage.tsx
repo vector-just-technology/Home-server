@@ -221,12 +221,13 @@ function BookmarksTab() {
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {Object.entries(grouped).map(([f, items]) =>
-          items.length > 0 && (
+        {Object.entries(grouped).map(([f, items]) => {
+          const bms = items as any[]
+          return bms.length > 0 && (
             <div key={f}>
               <div style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--text-muted)', marginBottom: 4 }}>{f}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                {items.map(b => (
+                {bms.map(b => (
                   <div key={b.id} className="glass-card" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 24, height: 24, borderRadius: 6, background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, flexShrink: 0 }}>
                       {b.favicon ? <img src={b.favicon} alt="" style={{ width: 16, height: 16 }} /> : '🔗'}

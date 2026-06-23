@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Trash2, RotateCcw, File, Folder } from 'lucide-react'
+import { Trash2, RotateCcw, File, FileText, Folder } from 'lucide-react'
 import api from '../utils/api'
 
 export default function TrashPage() {

@@ -10,6 +10,7 @@ export interface User {
 export interface SystemStatus {
   platform: string
   hostname: string
+  python: string
   cpu: { percent: number; cores: number }
   memory: { total: number; used: number; percent: number }
   temperature: number | string
@@ -40,6 +41,7 @@ export interface FileItem {
   type: 'file' | 'directory'
   size: number
   modified: number
+  ext?: string
 }
 
 export interface Device {
