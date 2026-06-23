@@ -16,4 +16,4 @@ except Exception as e:
 
 if __name__ == '__main__':
     print(f'ALPHA ready on 0.0.0.0:{Config.CORE_PORT}', flush=True)
-    socketio.run(app, host='0.0.0.0', port=Config.CORE_PORT, debug=False)
+    socketio.run(app, host='0.0.0.0', port=Config.CORE_PORT, debug=False, allow_unsafe_werkzeug=True)
