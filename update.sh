@@ -52,7 +52,6 @@ if ! curl -s http://localhost:11434/api/tags &>/dev/null; then
 fi
 echo "Pulling Ollama models..."
 ollama list 2>/dev/null | grep -q llama3.2 || ollama pull llama3.2:1b 2>&1 || true
-ollama list 2>/dev/null | grep -q gemma4 || ollama pull gemma4:e2b 2>&1 || true
 ollama list 2>/dev/null | grep -q mistral || ollama pull mistral:7b 2>&1 || true
 fi
 sudo systemctl restart alpha.service
