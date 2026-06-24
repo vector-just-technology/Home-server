@@ -608,7 +608,9 @@ function ProvidersTab({ providers, onUpdate }: { providers: any[]; onUpdate: () 
     openai: { url: 'https://api.openai.com', models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'] },
     gemini: { url: '', models: ['gemini-pro', 'gemini-1.5-flash', 'gemini-1.5-pro'] },
     claude: { url: '', models: ['claude-3-haiku-20240307', 'claude-3-sonnet-20240229', 'claude-3-opus-20240229', 'claude-3-5-sonnet-20241022'] },
-    ollama: { url: 'http://localhost:11434', models: ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b', 'codellama:7b'] },
+    ollama: { url: 'http://localhost:11434', models: ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b', 'codellama:7b',
+        'gemma4:e2b', 'gemma4:12b', 'gemma4:e4b', 'nemotron-3-ultra:cloud', 'deepseek-v4-flash:cloud', 'qwen3.5:cloud'] },
+    opencode: { url: 'https://api.opencode.ai/v1', models: ['big-pickle', 'deepseek-v4-flash-free', 'glm-5-free', 'kimi-k2.6-free'] },
   }
 
   const typeChanged = (t: string) => { setType(t); setApiUrl(providerDefaults[t]?.url || '') }
