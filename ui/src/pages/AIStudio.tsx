@@ -245,7 +245,7 @@ export default function AIStudio() {
         const remoteModels = modelsRes.data?.remote || []
         const ollamaModels = remoteModels.length > 0
           ? remoteModels.map((m: any) => m.name)
-          : ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b']
+          : ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b', 'codellama:7b', 'gemma4:e2b']
         if (ollamaOnline) {
           provs.push({ id: '__ollama__', name: 'Ollama (local)', type: 'ollama', default_model: ollamaModels[0] || 'llama3.2:1b', models: ollamaModels })
         }
@@ -620,9 +620,11 @@ function ProvidersTab({ providers, onUpdate }: { providers: any[]; onUpdate: () 
     openai: { url: 'https://api.openai.com', models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'] },
     gemini: { url: '', models: ['gemini-pro', 'gemini-1.5-flash', 'gemini-1.5-pro'] },
     claude: { url: '', models: ['claude-3-haiku-20240307', 'claude-3-sonnet-20240229', 'claude-3-opus-20240229', 'claude-3-5-sonnet-20241022'] },
-    ollama: { url: 'http://localhost:11434', models: ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b', 'codellama:7b',
-        'gemma4:e2b', 'gemma4:12b', 'gemma4:e4b', 'nemotron-3-ultra:cloud', 'deepseek-v4-flash:cloud', 'qwen3.5:cloud'] },
+    ollama: { url: 'http://localhost:11434', models: ['llama3.2:1b', 'llama3.2:3b', 'llama3.1:8b', 'mistral:7b', 'codellama:7b', 'gemma4:e2b', 'gemma4:12b', 'gemma4:e4b'] },
     opencode: { url: 'https://opencode.ai/zen', models: ['big-pickle', 'deepseek-v4-flash-free', 'mimo-v2.5-free', 'qwen3.6-plus-free', 'minimax-m3-free', 'nemotron-3-ultra-free', 'north-mini-code-free'] },
+    groq: { url: 'https://api.groq.com/openai/v1', models: ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant', 'mixtral-8x7b-32768', 'gemma2-9b-it'] },
+    huggingface: { url: 'https://api-inference.huggingface.co/v1', models: ['meta-llama/Llama-3.2-3B-Instruct', 'mistralai/Mistral-7B-Instruct-v0.3', 'HuggingFaceH4/zephyr-7b-beta'] },
+    cloudflare: { url: '', models: ['@cf/meta/llama-3.2-3b-instruct', '@cf/mistral/mistral-7b-instruct-v0.1', '@cf/meta/llama-3.2-1b-instruct'] },
   }
 
   const typeChanged = (t: string) => { setType(t); setApiUrl(providerDefaults[t]?.url || '') }
@@ -636,8 +638,8 @@ function ProvidersTab({ providers, onUpdate }: { providers: any[]; onUpdate: () 
       </div>
       {showAdd && (
         <div className="glass-card" style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ display: 'flex', gap: 6 }}>{['ollama', 'openai', 'gemini', 'claude'].map(t => (
-            <button key={t} className={`btn btn-sm ${type === t ? 'btn-primary' : 'btn-ghost'}`} onClick={() => typeChanged(t)} style={{ textTransform: 'capitalize' }}>{t}</button>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{['ollama', 'openai', 'gemini', 'claude', 'opencode', 'groq', 'huggingface', 'cloudflare'].map(t => (
+            <button key={t} className={`btn btn-sm ${type === t ? 'btn-primary' : 'btn-ghost'}`} onClick={() => typeChanged(t)} style={{ textTransform: 'capitalize', fontSize: 10 }}>{t}</button>
           ))}</div>
           <input placeholder="Display name" value={name} onChange={e => setName(e.target.value)} style={{ height: 32, fontSize: 13 }} />
           {type !== 'ollama' && <input placeholder="API Key" value={apiKey} onChange={e => setApiKey(e.target.value)} type="password" style={{ height: 32, fontSize: 13 }} />}

@@ -90,12 +90,18 @@ class OllamaProvider(BaseProvider):
         return []
 
 class OpenAICompatibleProvider(BaseProvider):
+    def _api_url(self, path=''):
+        base = self.api_url.rstrip('/')
+        if base.endswith('/v1'):
+            return base + path
+        return base + '/v1' + path
+
     def chat(self, messages, model=''):
         model = model or self.model or 'gpt-3.5-turbo'
         headers = {'Authorization': f'Bearer {self.api_key}', 'Content-Type': 'application/json'}
         body = {'model': model, 'messages': messages, 'max_tokens': 4096}
         try:
-            r = requests.post(f'{self.api_url}/v1/chat/completions', json=body, headers=headers, timeout=120)
+            r = requests.post(self._api_url('/chat/completions'), json=body, headers=headers, timeout=120)
             if r.status_code == 200: return r.json()['choices'][0]['message']['content']
             return f'API error: {r.status_code} - {r.text[:200]}'
         except Exception as e: return f'Error: {str(e)}'
@@ -107,7 +113,7 @@ class OpenAICompatibleProvider(BaseProvider):
             headers['Authorization'] = f'Bearer {self.api_key}'
         body = {'model': model, 'messages': messages, 'max_tokens': 4096, 'stream': True}
         try:
-            r = requests.post(f'{self.api_url}/v1/chat/completions', json=body, headers=headers, stream=True, timeout=120)
+            r = requests.post(self._api_url('/chat/completions'), json=body, headers=headers, stream=True, timeout=120)
             if r.status_code != 200:
                 yield f'\nAPI error: {r.status_code} - {r.text[:200]}'
                 return
@@ -130,7 +136,7 @@ class OpenAICompatibleProvider(BaseProvider):
     def list_models(self):
         headers = {'Authorization': f'Bearer {self.api_key}'}
         try:
-            r = requests.get(f'{self.api_url}/v1/models', headers=headers, timeout=10)
+            r = requests.get(self._api_url('/models'), headers=headers, timeout=10)
             if r.status_code == 200: return [m['id'] for m in r.json().get('data', [])[:50]]
         except: pass
         return []
@@ -236,6 +242,9 @@ PROVIDER_MAP = {
     'gemini': GeminiProvider,
     'claude': ClaudeProvider,
     'opencode': OpenAICompatibleProvider,
+    'groq': OpenAICompatibleProvider,
+    'huggingface': OpenAICompatibleProvider,
+    'cloudflare': OpenAICompatibleProvider,
 }
 
 def get_provider(provider_type: str, config: dict = None) -> BaseProvider:
