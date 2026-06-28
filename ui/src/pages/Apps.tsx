@@ -91,7 +91,7 @@ const iconMap: Record<string, React.ReactNode> = {
   'thumbs-up': <ThumbsUp size={20} />,
   'toggle-left': <ToggleLeft size={20} />,
   'toggle-right': <ToggleRight size={20} />,
-  'tool': <Tool size={20} />, 'trash': <Trash size={20} />,
+  'tool': <Wrench size={20} />, 'trash': <Trash size={20} />,
   'trending-down': <TrendingDown size={20} />,
   'trending-up': <TrendingUp size={20} />,
   'triangle': <Triangle size={20} />, 'truck': <Truck size={20} />,
