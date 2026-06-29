@@ -28,19 +28,25 @@ def register():
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    user = User.query.filter_by(username=data['username']).first()
-    if not user or not check_password_hash(user.password_hash, data['password']):
-        return jsonify({'error': 'Invalid credentials'}), 401
-    login_user(user)
-    token = jwt.encode({
-        'user_id': user.id,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30)
-    }, Config.JWT_SECRET, algorithm='HS256')
-    return jsonify({
-        'token': token,
-        'user': {'id': user.id, 'username': user.username, 'role': user.role, 'email': user.email}
-    })
+    try:
+        data = request.json
+        user = User.query.filter_by(username=data['username']).first()
+        if not user or not check_password_hash(user.password_hash, data['password']):
+            return jsonify({'error': 'Invalid credentials'}), 401
+        login_user(user)
+        token = jwt.encode({
+            'user_id': user.id,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30)
+        }, Config.JWT_SECRET, algorithm='HS256')
+        return jsonify({
+            'token': token,
+            'user': {'id': user.id, 'username': user.username, 'role': user.role, 'email': user.email}
+        })
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print("LOGIN CRASH:", tb, flush=True)
+        return jsonify({'error': str(e), 'traceback': tb}), 500
 
 @auth_bp.route('/logout', methods=['POST'])
 @login_required

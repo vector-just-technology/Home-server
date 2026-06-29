@@ -4,7 +4,8 @@ from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import Config
-import jwt, os, traceback
+import jwt, os, traceback, logging
+logging.basicConfig(filename='/tmp/alpha-error.log', level=logging.ERROR, format='%(asctime)s %(message)s')
 
 db = SQLAlchemy()
 socketio = SocketIO(cors_allowed_origins="*")
@@ -113,6 +114,17 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
+    app.config['TRAP_HTTP_EXCEPTIONS'] = True
+
+    @app.errorhandler(Exception)
+    def handle_error(e):
+        tb = traceback.format_exc()
+        print("=== HANDLED ERROR ===", flush=True)
+        print(tb, flush=True)
+        print("=====================", flush=True)
+        logging.error("Unhandled: %s\n%s", e, tb)
+        return jsonify({'error': str(e), 'traceback': tb}), 500
 
     from api.monitor import start_collector
     start_collector(app)

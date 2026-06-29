@@ -13,3 +13,4 @@ class Config:
     JWT_SECRET = os.getenv('JWT_SECRET', 'alpha-jwt-secret-change-in-production-make-it-longer')
     CORE_PORT = int(os.getenv('CORE_PORT', 5000))
     UI_PORT = int(os.getenv('UI_PORT', 3000))
+    PROPAGATE_EXCEPTIONS = True
