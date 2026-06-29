@@ -901,8 +901,8 @@ function NetworkTab() {
   const [connectPass, setConnectPass] = useState('')
   const [wifiMsg, setWifiMsg] = useState('')
   const [wifiErr, setWifiErr] = useState('')
-  const [hotspotSsid, setHotspotSsid] = useState('ALPHA-Setup')
-  const [hotspotPass, setHotspotPass] = useState('alphasetup')
+  const [hotspotSsid, setHotspotSsid] = useState('V-Home-server')
+  const [hotspotPass, setHotspotPass] = useState('homeserver')
   const [hotspotBusy, setHotspotBusy] = useState(false)
 
   useEffect(() => { loadWifiStatus() }, [])

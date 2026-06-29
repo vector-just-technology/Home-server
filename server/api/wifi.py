@@ -114,7 +114,7 @@ def wifi_connect():
 def hotspot_on():
     """Create a hotspot access point."""
     data = request.json
-    ssid = data.get('ssid', 'ALPHA-Setup')
+    ssid = data.get('ssid', 'V-Home-server')
     password = data.get('password', 'alphasetup')
 
     # Create hotspot connection if it doesn't exist
