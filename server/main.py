@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import Config
-import jwt, os
+import jwt, os, traceback
 
 db = SQLAlchemy()
 socketio = SocketIO(cors_allowed_origins="*")
@@ -20,6 +20,7 @@ def create_app():
     login_manager.init_app(app)
 
     login_manager.login_view = 'auth.login'
+    login_manager.unauthorized_handler(lambda: (jsonify({'error': 'Unauthorized'}), 401))
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -112,6 +113,12 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
+    @app.errorhandler(Exception)
+    def handle_error(e):
+        tb = traceback.format_exc()
+        print("SERVER ERROR:", tb)
+        return jsonify({'error': 'Server error', 'detail': str(e), 'traceback': tb}), 500
 
     from api.monitor import start_collector
     start_collector(app)

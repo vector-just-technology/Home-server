@@ -72,6 +72,8 @@ def check_permission(page, action='view'):
         return wrapper
     return decorator
 
+import copy
+
 def get_merged_permissions(user):
     if user.role == 'admin':
         return ADMIN_PERMISSIONS
@@ -79,11 +81,13 @@ def get_merged_permissions(user):
         stored = user.permissions or {}
     except Exception:
         stored = {}
-    merged = DEFAULT_PERMISSIONS.copy()
+    merged = copy.deepcopy(DEFAULT_PERMISSIONS)
     for section in merged:
         if section in stored:
-            if isinstance(merged[section], dict):
+            if isinstance(merged[section], dict) and isinstance(stored[section], dict):
                 merged[section].update(stored[section])
+            else:
+                merged[section] = stored[section]
     return merged
 
 @permissions_bp.route('/default', methods=['GET'])
