@@ -48,10 +48,15 @@ export default function Login() {
       const r = await api.post('/system/dev-update', {}, { timeout: 600000 })
       setDevOutput(r.data.output || 'Done')
       if (r.data.error) setDevError(r.data.error)
+      else setDevOutput(prev => prev + '\n=== Update Complete! ===\nServer is restarting to apply changes.')
     } catch (err: any) {
-      const msg = err.response?.data?.error || err.message || 'Update failed'
-      setDevError(msg)
-      setDevOutput(prev => prev + '\nError: ' + msg)
+      const msg = err.response?.data?.error || err.message || ''
+      if (msg.includes('Network Error') || msg.includes('Failed to fetch') || msg.includes('socket') || msg.includes('ECONNRESET')) {
+        setDevOutput(prev => prev + '\n=== Update Complete! ===\nServer is restarting to apply changes.')
+      } else {
+        setDevError(msg || 'Update failed')
+        setDevOutput(prev => prev + '\nError: ' + msg)
+      }
     } finally {
       setDevRunning(false)
     }
