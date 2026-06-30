@@ -81,5 +81,5 @@ ollama pull mistral && ollama pull llama3.2:1b
 - More system tools
 - New App feature ( Still In development )
 
-2026 vector all rights reserved
+2026 Vector. All rights reserved.
 
