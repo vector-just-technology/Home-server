@@ -3,7 +3,8 @@ import {
   Network, Wifi, Monitor, Server, Radio, Activity,
   RefreshCw, Search, Loader, AlertCircle, Check, Info, X,
   WifiOff, Map, List, Zap, Clock, Globe
-, AlertTriangle} from 'lucide-react'
+, AlertTriangle
+} from 'lucide-react'
 import api from '../utils/api'
 
 interface NetDevice {
