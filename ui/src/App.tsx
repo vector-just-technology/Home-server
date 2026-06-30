@@ -17,6 +17,7 @@ import ToolsPage from './pages/ToolsPage'
 import SystemToolsPage from './pages/SystemToolsPage'
 import DownloadsPage from './pages/Downloads'
 import DisplayPage from './pages/Display'
+import PagePlaceholder from './pages/PagePlaceholder'
 import Layout from './components/layout/Layout'
 import { PermissionsProvider } from './hooks/usePermissions'
 import JokeTimeNotice from './pages/JokeTimeNotice'
@@ -63,29 +64,29 @@ function AppRoutes() {
               <Route path="/system-tools" element={<SystemToolsPage />} />
               <Route path="/downloads" element={<DownloadsPage />} />
               <Route path="/profile" element={<Navigate to="/settings" />} />
-              <Route path="/network" element={<Navigate to="/devices" />} />
-              <Route path="/network/*" element={<Navigate to="/devices" />} />
-              <Route path="/music" element={<Navigate to="/" />} />
-              <Route path="/music/*" element={<Navigate to="/" />} />
-              <Route path="/admin" element={<Navigate to="/settings" />} />
-              <Route path="/processes" element={<Navigate to="/system-tools" />} />
-              <Route path="/firewall" element={<Navigate to="/system-tools" />} />
-              <Route path="/dns" element={<Navigate to="/devices" />} />
-              <Route path="/proxy" element={<Navigate to="/devices" />} />
-              <Route path="/videos" element={<Navigate to="/" />} />
-              <Route path="/photos" element={<Navigate to="/" />} />
-              <Route path="/podcasts" element={<Navigate to="/" />} />
-              <Route path="/bookmarks" element={<Navigate to="/" />} />
-              <Route path="/notes" element={<Navigate to="/" />} />
-              <Route path="/calendar" element={<Navigate to="/" />} />
-              <Route path="/calculator" element={<Navigate to="/" />} />
-              <Route path="/recent" element={<Navigate to="/" />} />
-              <Route path="/favorites" element={<Navigate to="/" />} />
-              <Route path="/files" element={<Navigate to="/" />} />
-              <Route path="/permissions" element={<Navigate to="/users" />} />
-              <Route path="/audit" element={<Navigate to="/" />} />
-              <Route path="/backup" element={<Navigate to="/storage" />} />
-              <Route path="/encryption" element={<Navigate to="/settings" />} />
+              <Route path="/processes" element={<PagePlaceholder />} />
+              <Route path="/firewall" element={<PagePlaceholder />} />
+              <Route path="/dns" element={<PagePlaceholder />} />
+              <Route path="/proxy" element={<PagePlaceholder />} />
+              <Route path="/music" element={<PagePlaceholder />} />
+              <Route path="/music/*" element={<PagePlaceholder />} />
+              <Route path="/videos" element={<PagePlaceholder />} />
+              <Route path="/photos" element={<PagePlaceholder />} />
+              <Route path="/podcasts" element={<PagePlaceholder />} />
+              <Route path="/bookmarks" element={<PagePlaceholder />} />
+              <Route path="/notes" element={<PagePlaceholder />} />
+              <Route path="/calendar" element={<PagePlaceholder />} />
+              <Route path="/calculator" element={<PagePlaceholder />} />
+              <Route path="/recent" element={<PagePlaceholder />} />
+              <Route path="/favorites" element={<PagePlaceholder />} />
+              <Route path="/files" element={<PagePlaceholder />} />
+              <Route path="/network" element={<PagePlaceholder />} />
+              <Route path="/network/*" element={<PagePlaceholder />} />
+              <Route path="/permissions" element={<PagePlaceholder />} />
+              <Route path="/audit" element={<PagePlaceholder />} />
+              <Route path="/backup" element={<PagePlaceholder />} />
+              <Route path="/encryption" element={<PagePlaceholder />} />
+              <Route path="/admin" element={<PagePlaceholder />} />
               <Route path="*" element={<Dashboard />} />
             </Routes>
           </Layout>
