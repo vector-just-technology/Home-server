@@ -248,7 +248,7 @@ export default function AIStudio() {
   }, [messages, streamingText])
 
   const selectProvider = (p: any, model: string) => {
-    setActiveProvider({ id: p.id, name: p.name, type: p.type, model })
+    setActiveProvider({ id: p.id, name: p.name, type: p.type, api_url: p.api_url, api_key: p.api_key, model })
     setActiveModel(model)
     setShowProviderDropdown(false)
   }
