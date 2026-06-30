@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import {
   Key, QrCode, Link, FileText, CheckSquare, Bookmark, Plus, Trash2, Pin, Edit3, Terminal, RotateCcw, RefreshCw,
-  Loader, AlertCircle, Check, Info, X, Copy
+  Loader, AlertCircle, Check, Info, X, Copy, AlertTriangle
 } from 'lucide-react'
 import api from '../utils/api'
 
@@ -91,7 +91,7 @@ function TerminalTab({ addToast }: { addToast: (msg: string, type: ToastData['ty
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [lines])
 
   useEffect(() => {
-    const es = new EventSource('/tools/terminal/stream')
+    const es = new EventSource('/api/tools/terminal/stream')
     es.onmessage = (e) => {
       try {
         const d = JSON.parse(e.data)
@@ -699,3 +699,4 @@ function ShortenTab({ addToast }: { addToast: (msg: string, type: ToastData['typ
     </div>
   )
 }
+
