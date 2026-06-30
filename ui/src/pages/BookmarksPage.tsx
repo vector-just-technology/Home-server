@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react'
 import {
   Bookmark, Plus, X, Trash2, Loader, AlertCircle, Check,
   Info, Search, Edit3, Save, Link, Folder, ExternalLink
-, AlertTriangle} from 'lucide-react'
+, AlertTriangle
+} from 'lucide-react'
 import api from '../utils/api'
 
 interface BookmarkItem {
