@@ -68,6 +68,7 @@ def status():
         # Add virtual OpenCode Zen provider
         result['providers'].append({
             'id': '__opencode__', 'name': 'OpenCode Zen', 'type': 'openai',
+            'api_url': 'https://opencode.ai/zen/v1', 'api_key': '',
             'default_model': 'big-pickle',
             'models': OPENCODE_MODELS
         })
