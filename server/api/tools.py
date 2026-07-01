@@ -39,6 +39,7 @@ def _get_session(user_id):
 BLOCKED_CMDS = ['rm -rf /', 'rm -rf /*', 'mkfs', 'dd if=', ':(){ :|:& };:', '> /dev/sda']
 
 @tools_bp.route('/terminal/stream', methods=['GET'])
+@tools_bp.route('/terminal_stream', methods=['GET'])
 @login_required
 def terminal_stream():
     uid = str(current_user.id)

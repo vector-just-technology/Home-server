@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set +e
 cd "$(dirname "$0")"
 git pull
 # Ensure virtual environment exists
